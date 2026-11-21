@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F7F8FA">
+  <meta name="description" content="SPORTIX — فروشگاه تجهیزات ورزشی: بدنسازی، فوتبال، دویدن، شنا، یوگا و بسکتبال.">
+  <title>SPORTIX | فروشگاه تجهیزات ورزشی</title>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("sportix_theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="announce" id="announce"></div>
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand ltr" href="./" aria-label="SPORTIX"><i></i>SPORTIX</a>
+      <nav class="nav" aria-label="منوی اصلی">
+        <a href="#products">فروشگاه</a>
+        <a href="#packs">پک‌های ورزشی</a>
+        <button type="button" id="navAssistant">دستیار خرید</button>
+      </nav>
+      <label class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="جستجوی محصول…" aria-label="جستجوی محصول" autocomplete="off">
+        <kbd>/</kbd>
+      </label>
+      <div class="tools">
+        <button class="tool" id="themeBtn" aria-label="تغییر تم روشن و تیره">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z"/></svg>
+        </button>
+        <button class="tool" id="favBtn" aria-label="علاقه‌مندی‌ها">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg>
+          <b class="dot" id="favCount" hidden>0</b>
+        </button>
+        <button class="tool cart" id="cartBtn" aria-label="سبد خرید">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg>
+          <b class="dot" id="cartCount" hidden>0</b>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <h1 id="heroTitle"></h1>
+        <p id="heroSub"></p>
+        <div class="hero-actions">
+          <a class="btn" href="#products">مشاهده محصولات</a>
+          <button class="btn ghost" type="button" id="heroAssistant">کمکم کن انتخاب کنم</button>
+        </div>
+        <ul class="facts" id="facts"></ul>
+      </div>
+      <div class="collage" id="collage" aria-label="محصولات منتخب"></div>
+    </section>
+
+    <section class="wrap section" id="products">
+      <div class="section-head">
+        <h2>محصولات</h2>
+        <span class="muted" id="resultCount"></span>
+      </div>
+      <div class="pills" id="pills" role="tablist" aria-label="دسته‌بندی"></div>
+      <div class="filters">
+        <label>مناسب برای
+          <select id="gender"><option value="همه">همه</option><option>مردانه</option><option>زنانه</option><option>یونیسکس</option></select>
+        </label>
+        <label>حداقل قیمت (تومان)<input id="minP" type="number" min="0" inputmode="numeric" placeholder="۰"></label>
+        <label>حداکثر قیمت (تومان)<input id="maxP" type="number" min="0" inputmode="numeric" placeholder="بدون سقف"></label>
+        <label>مرتب‌سازی
+          <select id="sort"><option value="default">پیشنهادی</option><option value="low">ارزان‌ترین</option><option value="high">گران‌ترین</option><option value="off">بیشترین تخفیف</option></select>
+        </label>
+        <label class="check"><input type="checkbox" id="inStock"> فقط کالاهای موجود</label>
+        <button class="btn ghost sm" id="reset" type="button">حذف فیلترها</button>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="empty" id="empty" hidden>محصولی با این فیلترها پیدا نشد. فیلترها را کم کن یا جستجو را پاک کن.</p>
+    </section>
+
+    <section class="wrap section" id="packs">
+      <div class="section-head">
+        <h2>پک‌های ورزشی</h2>
+        <span class="muted">چند محصول با هم بخر، تخفیف خودکار بگیر</span>
+      </div>
+      <div class="packs" id="packList"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="wrap foot">
+      <a class="brand ltr" href="./" aria-label="SPORTIX"><i></i>SPORTIX</a>
+      <p class="muted">تجهیزات ورزشی منتخب برای هر قدم از مسیر تمرین.</p>
+      <small class="muted">© ۲۰۲۶ SPORTIX · نسخه نمایشی فروشگاه</small>
+    </div>
+  </footer>
+
+  <button class="fab" id="fab" type="button" aria-label="باز کردن دستیار هوشمند خرید">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3Z"/><path d="M18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2Z"/></svg>
+    دستیار خرید
+  </button>
+
+  <!-- سبد خرید -->
+  <dialog id="cartDlg" class="drawer" aria-label="سبد خرید">
+    <div class="dlg-head"><h3>سبد خرید</h3><button class="x" data-close aria-label="بستن">×</button></div>
+    <div class="cart-list" id="cartList"></div>
+    <div class="cart-sum" id="cartSum"></div>
+  </dialog>
+
+  <!-- جزئیات محصول -->
+  <dialog id="detailDlg" class="wide" aria-label="جزئیات محصول">
+    <div class="dlg-head"><h3 id="dTitle">جزئیات محصول</h3><button class="x" data-close aria-label="بستن">×</button></div>
+    <div class="dlg-body" id="dBody"></div>
+  </dialog>
+
+  <!-- علاقه‌مندی‌ها -->
+  <dialog id="favDlg" aria-label="علاقه‌مندی‌ها">
+    <div class="dlg-head"><h3>علاقه‌مندی‌ها</h3><button class="x" data-close aria-label="بستن">×</button></div>
+    <div class="dlg-body" id="favList"></div>
+  </dialog>
+
+  <!-- پرداخت آزمایشی -->
+  <dialog id="payDlg" aria-label="ثبت سفارش">
+    <div class="dlg-head"><h3>ثبت سفارش</h3><button class="x" data-close aria-label="بستن">×</button></div>
+    <form class="dlg-body form" id="payForm">
+      <p class="muted">این یک فروشگاه نمایشی است؛ پرداخت واقعی انجام نمی‌شود و فقط سفارش آزمایشی ثبت می‌شود.</p>
+      <label class="field">نام و نام خانوادگی<input name="name" required autocomplete="name"></label>
+      <label class="field">شماره موبایل<input name="phone" required inputmode="tel" autocomplete="tel" placeholder="۰۹۱۲۳۴۵۶۷۸۹"></label>
+      <label class="field">آدرس<textarea name="address" rows="2" required autocomplete="street-address"></textarea></label>
+      <div class="pay-total" id="payTotal"></div>
+      <p class="err" id="payErr" role="alert"></p>
+      <button class="btn red block">ثبت سفارش آزمایشی</button>
+    </form>
+  </dialog>
+
+  <!-- دستیار -->
+  <dialog id="aiDlg" aria-label="دستیار هوشمند خرید">
+    <div class="dlg-head"><h3>دستیار خرید</h3><button class="x" data-close aria-label="بستن">×</button></div>
+    <div class="chat" id="chat"></div>
+    <form class="chat-form" id="chatForm">
+      <input id="chatIn" placeholder="مثلاً: برای شروع بدنسازی با بودجه ۲ میلیون چی بخرم؟" autocomplete="off" aria-label="پیام شما">
+      <button class="btn">ارسال</button>
+    </form>
+    <p class="hint muted">پاسخ‌ها از روی همین کاتالوگ ساخته می‌شود. برای هوش مصنوعی واقعی باید API امن به بک‌اند وصل شود.</p>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="data.js"></script>
+  <script src="common.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
